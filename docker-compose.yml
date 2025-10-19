@@ -1,0 +1,23 @@
+# comando version es obsoleto para lo nuevo, como la verison linux que estoy haciendo
+# version: '3.9'
+
+# Toda la info para crear la BD en docker
+services:
+  postgres:
+    image: postgres
+    # image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      POSTGRES_DB: ${SPRING_DATASOURCE_DB}
+      # POSTGRES_USER: user
+      # POSTGRES_PASSWORD: contraseña
+      # POSTGRES_DB: basedatos
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/18/docker
+
+# volumes:
+#   postgres:

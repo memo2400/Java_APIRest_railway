@@ -1,0 +1,168 @@
+
+archivo POM
+
+https://mvnrepository.com/
+    alli podemos buscar mas cosas de maven
+        Dotenv Java
+        3.0
+        agregamos su html
+            <!-- https://mvnrepository.com/artifact/io.github.cdimascio/dotenv-java -->
+            <dependency>
+                <groupId>io.github.cdimascio</groupId>
+                <artifactId>dotenv-java</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+
+###########################################
+
+aplication.propeties
+
+// aqui vamos a setear cosas para mapeada con BD
+// variables de entorno
+vamos a autogenerar la BD
+spring.jpa.hibernate.ddl-auto=update
+
+el puerto
+server.port=8080
+
+es opcional para que no se buguee, cone sto importamos lods datos del archivo secreto ENV
+spring.config.import=optional:file:.env[.properties]
+
+// esto se usa asi para que no quede vulnerable las pass y user, 
+// para eso es el entorno virtual
+spring.datasource.url= ${SPRING_DATASOURCE_URL}
+
+
+########################################################################
+.ENV
+
+jdbc = es lo que nosotros usamso para hacer la conexion, es un libreria
+
+el puesto defaul
+localhost:5432
+
+
+.env.template
+sirve de ejemplo para que otra persona lo vea publico
+
+############################
+
+Doker
+
+hatsa aqui ya todo sirve, ahora necesitamos de docker para quese pueda consumir una _BD
+
+alt + shift flecha = para seleeciona varias lineas de codigo
+
+con alt = seleciono varioa renglones, y pego todos multiples
+
+abrimos Duker y la terminal 
+    escribo: $ docker-compose up -d
+    Para linux, quito el gui para usar el docker nuevo que no depende de python
+    escribo: $ sudo docker compose up -d
+    hubo un error porque tenia enviroment mal escrito
+    con eso vamos a ducker y ya esta jalando al 100%
+
+Error se quito :
+    Important Change: the PGDATA environment variable of the 
+    image was changed to be version specific in PostgreSQL 18 
+    and above⁠. For 18 it is /var/lib/postgresql/18/docker. 
+    Later versions will replace 18 with their respective major 
+    version (e.g., /var/lib/postgresql/19/docker for PostgreSQL 19.x)
+
+############################
+
+docker
+
+sirve para hacr imagenes de BD de SQL que funcionen en cualquier lugar
+
+vamos aqui https://hub.docker.com/_/postgres
+
+en este archivo tenia un error
+    application.properties
+        el purto decia 
+            server.port=8080
+
+
+#########################
+
+TABLE PLUS
+
+creamos nuevo > new postgresSQL
+    ingresamos todos los datos de la BD que hicimos en .ENV
+    es la ruta 127.0.0.1
+    port es el mismo que usameo en el YML = 5432
+    nombre = el que quieramos
+    Darle a Test pero no jalo porque l doker no jalo en un inicio
+    ya jalo porque el volumen tenia yo mal faltaba codigo
+
+le damos en Test y luego conectar y full HD ya jalo
+
+
+#####################
+
+vamos al java princial y damps a run
+o play
+
+error
+    Description:
+
+    Failed to configure a DataSource: no embedded datasource could be configured.
+    Reason: Failed to determine a suitable driver class
+
+    en el entorno vitual tenia este error "jdbc." y era "jdbc:"
+     otro error era "postgressql" en ligar de "postgresql"
+        SPRING_DATASOURCE_URL= jdbc.postgressql://localhost:5432/nombreaelegir
+    
+    Error otra vez : TODO era porque teni mal el URL en el ENV.
+    
+    Error creating bean with name 'entityManagerFactory' defined in class path 
+    resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]:
+     Failed to initialize dependency 'dataSourceScriptDatabaseInitializer' 
+     of LoadTimeWeaverAware bean 'entityManagerFactory': 
+    Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined 
+    in class path resource 
+    [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: 
+    Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' 
+    parameter 0: Error creating bean with name 'dataSource' defined in 
+    class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: 
+    Factory method 'dataSource' threw exception with message: Failed to determine a suitable driver class
+
+OTRO Error
+
+    era oareido al anterior y se borro al reiniciar la pc de linux
+
+##################
+
+postman
+
+cremao nueva conexion con el puertos
+http://localhost:8080/productos
+
+usamo el POST
+    body
+    raw
+    JSON
+
+    escribo
+    {
+    "nombre": "Grafica",
+    "precio": 100.50
+    }   
+
+error no funciona el envio
+
+###############
+// 06:40:14
+
+// 06 : 47 : 00
+
+// 06:51 :30
+
+
+// 06:58:24
+
+//07:04:23
+
+//07:13:33
+
+//07:16:22
