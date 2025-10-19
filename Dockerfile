@@ -17,7 +17,7 @@ ARG PORT
 ENV PORT=${PORT}
 
 # copiar el app.jar a la app compilada
-COPY --from=build /app/app.jar
+COPY --from=build /app/app.jar .
 
 RUN useradd runtime
 USER runtime
