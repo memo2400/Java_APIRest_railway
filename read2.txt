@@ -1,0 +1,9 @@
+
+bajamos el repositorio del github como zip
+para que hagamos un nuevo repo
+
+Se modifica el app properties.
+
+se modifica el pom.xm
+
+Se crea un archivo Dockerfile, para crear un container de java
