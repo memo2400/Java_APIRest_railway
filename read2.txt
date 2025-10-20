@@ -7,3 +7,13 @@ Se modifica el app properties.
 se modifica el pom.xm
 
 Se crea un archivo Dockerfile, para crear un container de java
+
+en raiklway el link de url de nuestro ENV de la 
+app java es: 
+    jdbc:postgresql://${{Postgres.PGHOST}}:${{Postgres.PGPORT}}/${{Postgres.PGDATABASE}}
+Despues de configurar todo nuestros datos ENV del proyecto java
+clic al boton morado de "DEPLOY".
+
+Vamos  a nuestra app java, y le damos a "settings"
+para alli "generar un dominio"
+    javaapirestrailway-production.up.railway.app
