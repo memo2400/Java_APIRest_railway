@@ -59,10 +59,10 @@ import org.springframework.web.bind.annotation.PathVariable;
      * Si si lo encuientra lo modificamos
      */
     @GetMapping("/{id}")
-    public Producto obtenerProductoPorID(@PathVariable Long id, @RequestBody Producto detallesProducto){
+    public Producto obtenerProductoPorID(@PathVariable Long id){
+
         return productoRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException ("No encontramos el prducto de ID " + id));
-        
+        .orElseThrow(() -> new RuntimeException("No se encontro el ID buscado " + id));
     }
 
     /*
@@ -93,7 +93,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
      @PutMapping("/{id}")
      public Producto updateProducto(@PathVariable Long id, @RequestBody Producto detallesProducto) {
-        //TODO: process PUT request
          
          Producto productoo = productoRepository.findById(id)
         .orElseThrow(() -> new RuntimeException ("No encontramos el prducto de ID " + id));
