@@ -6,8 +6,10 @@ import com.hola.apirest.apirest.Repositories.Producto_Repository;
 import com.hola.apirest.apirest.Entities.Producto;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 //import org.springframework.web.bind.annotation.RequestParam;
@@ -62,7 +64,7 @@ import org.springframework.web.bind.annotation.PathVariable;
     public Producto obtenerProductoPorID(@PathVariable Long id){
 
         return productoRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("No se encontro el ID buscado " + id));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No encontramos el producto cuyo ID es: " + id));
     }
 
     /*
@@ -95,7 +97,7 @@ import org.springframework.web.bind.annotation.PathVariable;
      public Producto updateProducto(@PathVariable Long id, @RequestBody Producto detallesProducto) {
          
          Producto productoo = productoRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException ("No encontramos el prducto de ID " + id));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No encontramos el producto cuyo ID es: " + id));
          
         productoo.setNombre(detallesProducto.getNombre());
         productoo.setPrecio(detallesProducto.getPrecio());
@@ -111,7 +113,7 @@ import org.springframework.web.bind.annotation.PathVariable;
     @DeleteMapping ("/{id}")
     public String borrarProducto (@PathVariable Long id){
         Producto productoABorrar = productoRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("no se pudo borrar massivamente el producto " + id)); 
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo borrar el producto: " + id));
 
         productoRepository.delete(productoABorrar);
         return "se borro el producto " + id + "FHD";
