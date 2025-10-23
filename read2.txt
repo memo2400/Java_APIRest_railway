@@ -17,3 +17,32 @@ clic al boton morado de "DEPLOY".
 Vamos  a nuestra app java, y le damos a "settings"
 para alli "generar un dominio"
     javaapirestrailway-production.up.railway.app
+
+################################################
+
+despliegue en render.com
+    salio el error:
+
+        Se soluciono  agregando: un fortmato como esto a variable:
+            SPRING_DATASOURCE_URL= jdbc:postgresql://localhost:5432/nombreDatabase
+        
+        mas bien con esto se corrigio, todo de la database de render.com
+                jdbc:postgresql://${{HOST}}:${{PORT}}/${{DATABASE}}
+
+        2025-10-23T22:28:07.497Z  WARN 1 --- [apirest] [           main] 
+        ConfigServletWebServerApplicationContext : Exception encountered 
+        during context initialization - cancelling refresh attempt: 
+        org.springframework.beans.factory.UnsatisfiedDependencyException: 
+        Error creating bean with name 'dataSourceScriptDatabaseInitializer' 
+        defined in class path resource 
+        [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: 
+        Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' 
+        parameter 0: Error creating bean with name 'dataSource' defined in class 
+        path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: 
+        Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 
+        'dataSource' threw exception with message: URL must start with 'jdbc'
+
+        Caused by: org.springframework.beans.factory.BeanCreationException: 
+        Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]:
+        Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: 
+        Factory method 'dataSource' threw exception with message: URL must start with 'j
